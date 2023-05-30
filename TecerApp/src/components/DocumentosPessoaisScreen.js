@@ -85,11 +85,11 @@ const HomeScreen = ({ navigation }) => {
   <Table>
     <Row data={['Documento', 'Ação']} style={styles.tableHeader} textStyle={styles.tableHeaderText} />
     <Rows
-      data={tableData}
-      style={styles.tableRow}
-      textStyle={styles.tableRowText}
-      onPress={(rowData) => handleDownloadPDF(rowData[0])}
-    />
+    data={tableData}
+    style={styles.tableRow}
+    textStyle={{ ...styles.tableRowText }}
+    onPress={(rowData) => handleDownloadPDF(rowData[0])}
+  />
   </Table>
 </View>
 
@@ -191,30 +191,6 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 100,
   },
-  buttonsContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  button: {
-    width: '48%',
-    height: 80,
-    backgroundColor: '#0D1B40',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-  },
-  buttonText: {
-    fontSize: 16,
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold'
-  },
   logoutModalContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -249,6 +225,24 @@ const styles = StyleSheet.create({
   logoutModalButtonText: {
     fontSize: 16,
     color: '#fff',
+  },
+  tableHeader: {
+    height: 40,
+    backgroundColor: '#0D1B40',
+  },
+  tableHeaderText: {
+    textAlign: 'center',
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  tableRow: {
+    height: 40,
+    backgroundColor: '#f2f2f2',
+  },
+  tableRowText: {
+    textAlign: 'center',
+    fontSize: 14,
   },
 });
 
