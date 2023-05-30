@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Image, Text, TouchableOpacity, Modal, StyleSheet, Alert } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const HomeScreen = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -52,37 +54,45 @@ const HomeScreen = ({ navigation }) => {
         {/* Primeira linha de botões */}
         <View style={styles.buttonRow}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Botão 1</Text>
+            <Icon2 name="file-account" size={20} color="#fff" />
+            <Text style={styles.buttonText}>Documentos pessoais</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Botão 2</Text>
+            <Icon2 name="file-document" size={20} color="#fff" />
+            <Text style={styles.buttonText}>Documentos Pessoa Jurídica</Text>
           </TouchableOpacity>
         </View>
         {/* Segunda linha de botões */}
         <View style={styles.buttonRow}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Botão 3</Text>
+            <Icon name="coins" size={20} color="#fff" />
+            <Text style={styles.buttonText}>Financeiro</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Botão 4</Text>
+            <Icon name="calculator" size={20} color="#fff" />
+            <Text style={styles.buttonText}>Seus Impostos</Text>
           </TouchableOpacity>
         </View>
         {/* Terceira linha de botões */}
         <View style={styles.buttonRow}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Botão 5</Text>
+            <Icon2 name="file-search" size={20} color="#fff" />
+            <Text style={styles.buttonText}>Solicitações</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Botão 6</Text>
+            <Icon2 name="handshake" size={20} color="#fff" />
+            <Text style={styles.buttonText}>Honorários</Text>
           </TouchableOpacity>
         </View>
         {/* Quarta linha de botões */}
         <View style={styles.buttonRow}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Botão 7</Text>
+            <Icon name="question" size={20} color="#fff" />
+            <Text style={styles.buttonText}>Dúvidas Frequentes</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Botão 8</Text>
+            <Icon2 name="account-question" size={20} color="#fff" />
+            <Text style={styles.buttonText}>Fale com a Manu</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -200,6 +210,8 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     color: '#fff',
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
   logoutModalContainer: {
     flex: 1,

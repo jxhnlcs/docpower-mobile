@@ -5,6 +5,10 @@
 To run the app, just run the commands below in the terminal for install all dependencies:
 
 ```shell
+cd TecerApp
+```
+
+```shell
 npm install expo
 ```
 
@@ -22,6 +26,10 @@ npm install react-native-web@~0.18.10, react-dom@18.2.0, @expo/webpack-config@^1
 
 ```shell
 npm install react-navigation-stack @react-native-community/masked-view react-native-safe-area-context react-native-svg@13.4.0
+```
+
+```shell
+npm install react-native-vector-icons
 ```
 
 ```shell
