@@ -164,10 +164,15 @@ const styles = StyleSheet.create({
   logoutButton: {
     marginTop: 'auto',
     marginBottom: 30,
+    backgroundColor: '#0D1B40',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#0D1B40',
+    borderRadius: 5
   },
   logoutButtonText: {
     fontSize: 16,
-    color: '#0D1B40',
+    color: '#fff',
   },
   menuButton: {
     position: 'absolute',
