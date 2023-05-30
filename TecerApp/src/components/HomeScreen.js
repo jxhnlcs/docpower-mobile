@@ -1,11 +1,45 @@
-import React, { useState } from 'react';
-import { View, Image, Text, TouchableOpacity, Modal, StyleSheet, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Image, Text, TouchableOpacity, Modal, StyleSheet, Alert, BackHandler } from 'react-native';
+
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 const HomeScreen = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
+
+  useEffect(() => {
+    const backAction = () => {
+      if (menuVisible) {
+        setMenuVisible(false);
+        return true; // Impede o comportamento padrão de sair do aplicativo
+      }
+  
+      if (navigation.isFocused()) {
+        setLogoutModalVisible(true);
+        return true; // Impede o comportamento padrão de sair do aplicativo
+      }
+  
+      return false;
+    };
+  
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+  
+    return () => backHandler.remove(); // Remove o ouvinte quando o componente for desmontado
+  }, [navigation, menuVisible]);
+
+  const navigateToScreen = (screenName) => {
+    navigation.navigate(screenName);
+  }
+
+  const Button = ({ screenName, iconName, buttonText, iconLibrary }) => (
+    <TouchableOpacity style={styles.button} onPress={() => navigateToScreen(screenName)}>
+      {iconLibrary === 'FontAwesome5' && <Icon name={iconName} size={20} color="#fff" />}
+      {iconLibrary === 'MaterialCommunityIcons' && <Icon2 name={iconName} size={20} color="#fff" />}
+      <Text style={styles.buttonText}>{buttonText}</Text>
+    </TouchableOpacity>
+  );
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
@@ -19,6 +53,8 @@ const HomeScreen = ({ navigation }) => {
     setLogoutModalVisible(false);
     navigation.navigate('LoginScreen');
   };
+
+  
 
   const cancelLogout = () => {
     setLogoutModalVisible(false);
@@ -53,47 +89,63 @@ const HomeScreen = ({ navigation }) => {
       <View style={styles.buttonsContainer}>
         {/* Primeira linha de botões */}
         <View style={styles.buttonRow}>
-          <TouchableOpacity style={styles.button}>
-            <Icon2 name="file-account" size={20} color="#fff" />
-            <Text style={styles.buttonText}>Documentos pessoais</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Icon2 name="file-document" size={20} color="#fff" />
-            <Text style={styles.buttonText}>Documentos Pessoa Jurídica</Text>
-          </TouchableOpacity>
+          <Button
+            screenName="DocumentosPessoaisScreen"
+            iconName="file-account"
+            buttonText="Documentos pessoais"
+            iconLibrary="MaterialCommunityIcons"
+          />
+          <Button
+            screenName="DocumentosPessoaJuridicaScreen"
+            iconName="file-document"
+            buttonText="Documentos Pessoa Jurídica"
+            iconLibrary="MaterialCommunityIcons"
+          />
         </View>
         {/* Segunda linha de botões */}
         <View style={styles.buttonRow}>
-          <TouchableOpacity style={styles.button}>
-            <Icon name="coins" size={20} color="#fff" />
-            <Text style={styles.buttonText}>Financeiro</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Icon name="calculator" size={20} color="#fff" />
-            <Text style={styles.buttonText}>Seus Impostos</Text>
-          </TouchableOpacity>
+          <Button
+            screenName="FinanceiroScreen"
+            iconName="coins"
+            buttonText="Financeiro"
+            iconLibrary="FontAwesome5"
+          />
+          <Button
+            screenName="SeusImpostosScreen"
+            iconName="calculator"
+            buttonText="Seus Impostos"
+            iconLibrary="FontAwesome5"
+          />
         </View>
         {/* Terceira linha de botões */}
         <View style={styles.buttonRow}>
-          <TouchableOpacity style={styles.button}>
-            <Icon2 name="file-search" size={20} color="#fff" />
-            <Text style={styles.buttonText}>Solicitações</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Icon2 name="handshake" size={20} color="#fff" />
-            <Text style={styles.buttonText}>Honorários</Text>
-          </TouchableOpacity>
+          <Button
+            screenName="SolicitacoesScreen"
+            iconName="file-search"
+            buttonText="Solicitações"
+            iconLibrary="MaterialCommunityIcons"
+          />
+          <Button
+            screenName="HonorariosScreen"
+            iconName="handshake"
+            buttonText="Honorários"
+            iconLibrary="MaterialCommunityIcons"
+          />
         </View>
         {/* Quarta linha de botões */}
         <View style={styles.buttonRow}>
-          <TouchableOpacity style={styles.button}>
-            <Icon name="question" size={20} color="#fff" />
-            <Text style={styles.buttonText}>Dúvidas Frequentes</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Icon2 name="account-question" size={20} color="#fff" />
-            <Text style={styles.buttonText}>Fale com a Manu</Text>
-          </TouchableOpacity>
+          <Button
+            screenName="DuvidasFrequentesScreen"
+            iconName="question"
+            buttonText="Dúvidas Frequentes"
+            iconLibrary="FontAwesome5"
+          />
+          <Button
+            screenName="FaleComManuScreen"
+            iconName="account-question"
+            buttonText="Fale com a Manu"
+            iconLibrary="MaterialCommunityIcons"
+          />
         </View>
       </View>
 
