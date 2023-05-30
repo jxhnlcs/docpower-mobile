@@ -17,11 +17,11 @@ npm install @react-navigation/native-stack
 ```
 
 ```shell
-react-native-web@~0.18.10, react-dom@18.2.0, @expo/webpack-config@^18.0.1
+npm install react-native-web@~0.18.10, react-dom@18.2.0, @expo/webpack-config@^18.0.1
 ```
 
 ```shell
-npm install react-navigation-stack @react-native-community/masked-view react-native-safe-area-context
+npm install react-navigation-stack @react-native-community/masked-view react-native-safe-area-context react-native-svg@13.4.0
 ```
 
 ```shell

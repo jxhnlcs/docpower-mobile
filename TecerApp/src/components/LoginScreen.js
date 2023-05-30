@@ -13,6 +13,8 @@ const LoginScreen = ({ navigation }) => {
     if (isValidCPF(cpf) && senha === 'senha123') {
     //   Alert.alert('Sucesso', 'CPF válido');
       navigation.navigate('HomeScreen');
+      setCpf('');
+      setSenha('');
     } else {
       Alert.alert('Erro', 'CPF ou senha inválidos');
     }

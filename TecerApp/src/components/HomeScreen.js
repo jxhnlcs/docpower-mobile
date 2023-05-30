@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 10
   },
   backButton: {
     position: 'absolute',
@@ -182,7 +183,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 20,
-    marginTop: 50,
   },
   buttonRow: {
     flexDirection: 'row',
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '48%',
-    height: 100,
+    height: 80,
     backgroundColor: '#0D1B40',
     justifyContent: 'center',
     alignItems: 'center',
