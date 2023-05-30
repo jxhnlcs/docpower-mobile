@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-import RNHTMLtoPDF from 'react-native-html-to-pdf';
-import * as Print from 'expo-print';
 import { View, Image, Text, TouchableOpacity, Modal, StyleSheet} from 'react-native';
-
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 const HomeScreen = ({ navigation }) => {
@@ -13,25 +7,11 @@ const HomeScreen = ({ navigation }) => {
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
 
   const [tableData, setTableData] = useState([
-    ['Documento 1', 'Baixar'],
-    ['Documento 2', 'Baixar'],
-    ['Documento 3', 'Baixar'],
+    { documento: 'Documento 1', acao: 'Baixar' },
+    { documento: 'Documento 2', acao: 'Baixar' },
+    { documento: 'Documento 3', acao: 'Baixar' },
   ]);
-
-  const handleDownloadPDF = async (documentName) => {
-    try {
-      const options = {
-        html: `<h1>${documentName}</h1><p>Conteúdo do documento</p>`,
-        fileName: `${documentName}.pdf`,
-        directory: 'Documents',
-      };
-  
-      const file = await RNHTMLtoPDF.convert(options);
-      await Print.printAsync({ uri: file.filePath });
-    } catch (error) {
-      console.error('Erro ao gerar o PDF:', error);
-    }
-  };  
+ 
   
   const navigateToScreen = (screenName) => {
     navigation.navigate(screenName);
@@ -77,23 +57,24 @@ const HomeScreen = ({ navigation }) => {
 
       <View style={styles.logoContainer}>
         <Image source={require('../assets/logo.png')} style={styles.logo} />
-        <Text style={styles.username}>Nome do Usuário</Text>
+        <Text style={styles.username}>Documentos pessoais</Text>
       </View>
 
-      <View style={styles.container}>
-  {/* ...outros elementos de tela... */}
-  <Table>
-    <Row data={['Documento', 'Ação']} style={styles.tableHeader} textStyle={styles.tableHeaderText} />
-    <Rows
-    data={tableData}
-    style={styles.tableRow}
-    textStyle={{ ...styles.tableRowText }}
-    onPress={(rowData) => handleDownloadPDF(rowData[0])}
-  />
-  </Table>
-</View>
-
-
+      <View style={styles.tableContainer}>
+      <View style={styles.tableHeader}>
+        <Text style={styles.tableHeaderText}>Documento</Text>
+        <Text style={styles.tableHeaderText}>Ação</Text>
+      </View>
+      {tableData.map((row, index) => (
+        <TouchableOpacity
+          key={index}
+          style={[styles.tableRow, { backgroundColor: index % 2 === 0 ? '#f2f2f2' : '#fff' }]}
+>
+          <Text style={styles.tableRowText}>{row.documento}</Text>
+          <Text style={styles.tableRowText}>{row.acao}</Text>
+        </TouchableOpacity>
+      ))}
+    </View>
       <Modal
         visible={logoutModalVisible}
         animationType="slide"
@@ -226,9 +207,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
   },
+  tableContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
   tableHeader: {
+    flexDirection: 'row',
     height: 40,
     backgroundColor: '#0D1B40',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 65,
   },
   tableHeaderText: {
     textAlign: 'center',
@@ -237,10 +226,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   tableRow: {
+    flexDirection: 'row',
     height: 40,
-    backgroundColor: '#f2f2f2',
+    alignItems: 'center',
+    paddingHorizontal: 10,
   },
   tableRowText: {
+    flex: 1,
     textAlign: 'center',
     fontSize: 14,
   },
