@@ -19,6 +19,7 @@ npm install @react-navigation/native-stack
 ```shell
 react-native-web@~0.18.10, react-dom@18.2.0, @expo/webpack-config@^18.0.1
 ```
+
 ```shell
 npm install react-navigation-stack @react-native-community/masked-view react-native-safe-area-context
 ```
