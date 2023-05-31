@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { View, Image, Text, TouchableOpacity, Modal, StyleSheet} from 'react-native';
-
+import React, { useState} from 'react';
+import { View, Image, Text, TouchableOpacity, Modal, StyleSheet, Linking} from 'react-native';
 
 const HomeScreen = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
 
-  const [tableData, setTableData] = useState([
-    { documento: 'Documento 1', acao: 'Baixar' },
-    { documento: 'Documento 2', acao: 'Baixar' },
-    { documento: 'Documento 3', acao: 'Baixar' },
+  const [documentData, setDocumentData] = useState([
+    { name: 'Documento 1', youtubeLink: 'https://www.youtube.com/', documentLink: 'http://isf.mec.gov.br/images/pdf/placement_tests_practice_tests.pdf' },
+    { name: 'Documento 2', youtubeLink: 'https://www.youtube.com/', documentLink: 'https://www.example.com/documento2' },
   ]);
- 
-  
+
   const navigateToScreen = (screenName) => {
     navigation.navigate(screenName);
-  }
+  };
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
@@ -32,6 +29,14 @@ const HomeScreen = ({ navigation }) => {
 
   const cancelLogout = () => {
     setLogoutModalVisible(false);
+  };
+
+  const openYouTubeLink = (link) => {
+    Linking.openURL(link);
+  };
+
+  const openDocumentLink = (link) => {
+    Linking.openURL(link);
   };
 
   return (
@@ -57,24 +62,23 @@ const HomeScreen = ({ navigation }) => {
 
       <View style={styles.logoContainer}>
         <Image source={require('../assets/logo.png')} style={styles.logo} />
-        <Text style={styles.username}>Documentos pessoais</Text>
+        <Text style={styles.username}>Documentos Pessoais</Text>
       </View>
-
-      <View style={styles.tableContainer}>
-      <View style={styles.tableHeader}>
-        <Text style={styles.tableHeaderText}>Documento</Text>
-        <Text style={styles.tableHeaderText}>Ação</Text>
-      </View>
-      {tableData.map((row, index) => (
-        <TouchableOpacity
-          key={index}
-          style={[styles.tableRow, { backgroundColor: index % 2 === 0 ? '#f2f2f2' : '#fff' }]}
->
-          <Text style={styles.tableRowText}>{row.documento}</Text>
-          <Text style={styles.tableRowText}>{row.acao}</Text>
-        </TouchableOpacity>
-      ))}
-    </View>
+        <View style={styles.cardsContainer}>
+          {documentData.map((document, index) => (
+            <View key={index} style={styles.card}>
+              <Text style={styles.cardText}>{document.name}</Text>
+              <View style={styles.cardButtonsContainer}>
+                <TouchableOpacity style={styles.cardButton} onPress={() => openYouTubeLink(document.youtubeLink)}>
+                  <Text style={styles.cardButtonText}>YouTube</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.cardButton} onPress={() => openDocumentLink(document.documentLink)}>
+                  <Text style={styles.cardButtonText}>Abrir</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ))}
+        </View>
       <Modal
         visible={logoutModalVisible}
         animationType="slide"
@@ -114,7 +118,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 10
+    zIndex: 10,
   },
   backButton: {
     position: 'absolute',
@@ -138,6 +142,7 @@ const styles = StyleSheet.create({
   },
   username: {
     fontSize: 18,
+    fontWeight: 'bold'
   },
   logoutButton: {
     marginTop: 'auto',
@@ -146,7 +151,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     backgroundColor: '#0D1B40',
-    borderRadius: 5
+    borderRadius: 5,
   },
   logoutButtonText: {
     fontSize: 16,
@@ -207,34 +212,43 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
   },
-  tableContainer: {
+  cardsContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: -50,
   },
-  tableHeader: {
+  card: {
+    width: '90%',
+    backgroundColor: '#a1a6aa',
+    borderRadius: 10,
+    marginBottom: 20,
+    padding: 20,
     flexDirection: 'row',
-    height: 40,
-    backgroundColor: '#0D1B40',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 65,
   },
-  tableHeaderText: {
+  cardText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'left',
+  },
+  cardButtonsContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  cardButton: {
+    backgroundColor: '#0D1B40',
+    width: 90,
+    paddingVertical: 6,
+    borderRadius: 5,
+    marginBottom: 5,
+  },
+  cardButtonText: {
+    fontSize: 16,
     textAlign: 'center',
     color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  tableRow: {
-    flexDirection: 'row',
-    height: 40,
-    alignItems: 'center',
-    paddingHorizontal: 10,
-  },
-  tableRowText: {
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 14,
   },
 });
 

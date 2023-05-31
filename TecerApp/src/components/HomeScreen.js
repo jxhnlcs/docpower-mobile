@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, TouchableOpacity, Modal, StyleSheet, Alert, BackHandler } from 'react-native';
+import { View, Image, Text, TouchableOpacity, Modal, StyleSheet, Alert, BackHandler, ScrollView } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -61,7 +61,7 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {menuVisible && (
         <View style={styles.menuContainer}>
           <TouchableOpacity style={styles.backButton} onPress={toggleMenu}>
@@ -170,7 +170,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
       </Modal>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -211,6 +211,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   username: {
+    marginBottom: 20,
     fontSize: 18,
   },
   logoutButton: {
@@ -240,6 +241,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 30
   },
   logo: {
     width: 200,
