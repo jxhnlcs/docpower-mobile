@@ -1,8 +1,8 @@
-# docpower-mobile
+# Aplicativo Tecer
 
 ##### 📱:App
 
-To run the app, just run the commands below in the terminal for install all dependencies:
+Para rodar o sistema apenas rode os seguintes comandos no terminal para instalar as depedências:
 
 ```shell
 cd TecerApp
@@ -20,7 +20,8 @@ npm install
 npm start
 ```
 
-And read the QR code on the cell phone through the expo go app, or use an emulator
+E por fim leia o QR Code que aparecerá pelo terminal usando o aplicativo Expo GO, ou leia usando a câmera do celular
+Se você estiver usando emulador, apenas deixe o emulador aberto e digite "a" no terminal após o QR Code e ele irá rodar no seu emulador.
 
 # Technologies
 
