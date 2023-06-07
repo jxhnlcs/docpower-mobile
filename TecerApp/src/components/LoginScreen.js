@@ -9,15 +9,33 @@ const LoginScreen = ({ navigation }) => {
   const [senha, setSenha] = useState('');
 
   const handleLogin = () => {
-    // Validações necessárias
-    if (isValidCPF(cpf) && senha === 'senha123') {
-    //   Alert.alert('Sucesso', 'CPF válido');
-      navigation.navigate('HomeScreen');
-      setCpf('');
-      setSenha('');
-    } else {
-      Alert.alert('Erro', 'CPF ou senha inválidos');
-    }
+    const handleLogin = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            cpf: cpf,
+            senha: senha,
+          }),
+        });
+    
+        if (response.ok) {
+          // Login bem-sucedido
+          navigation.navigate('HomeScreen');
+          setCpf('');
+          setSenha('');
+        } else {
+          // Login inválido
+          Alert.alert('Erro', 'CPF ou senha inválidos');
+        }
+      } catch (error) {
+        console.error('Erro ao fazer login:', error);
+        Alert.alert('Erro', 'Ocorreu um erro ao fazer login');
+      }
+    };    
   };
 
   const handleForgotPassword = () => {
