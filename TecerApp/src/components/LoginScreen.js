@@ -8,10 +8,9 @@ const LoginScreen = ({ navigation }) => {
   const [cpf, setCpf] = useState('');
   const [senha, setSenha] = useState('');
 
-  const handleLogin = () => {
     const handleLogin = async () => {
       try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch('http://192.168.0.112:3000/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -35,7 +34,6 @@ const LoginScreen = ({ navigation }) => {
         console.error('Erro ao fazer login:', error);
         Alert.alert('Erro', 'Ocorreu um erro ao fazer login');
       }
-    };    
   };
 
   const handleForgotPassword = () => {

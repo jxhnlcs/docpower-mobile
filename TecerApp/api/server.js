@@ -9,10 +9,10 @@ const port = process.env.PORT || 3000;
 
 // Configurando a conexão com o banco de dados MySQL
 const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE
+  host: 'database.ctk3skro8xoh.us-east-2.rds.amazonaws.com',
+  user: 'admin',
+  password: 'admin123',
+  database: 'database'
 });
 
 // Estabelecendo a conexão com o banco de dados
@@ -23,6 +23,9 @@ connection.connect((error) => {
     console.log('Conexão bem-sucedida ao banco de dados!');
   }
 });
+
+// Middleware para analisar o corpo da requisição como JSON
+app.use(express.json());
 
 // Rota de autenticação de login
 app.post('/login', (req, res) => {
